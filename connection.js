@@ -1,8 +1,11 @@
 import mongoose  from "mongoose";
+import dotenv from "dotenv"
+
+dotenv.config()
 
 
 export default async function connection(){
-    const db = await mongoose.connect("mongodb+srv://rinshidav0706_db_user:7NZlavMG1FQY7Ecg@cluster0.hmo52r2.mongodb.net/socialmedia") //db name
+    const db = await mongoose.connect(process.env.mongo_url) //db name
     console.log("database connected")
     return db
 }
