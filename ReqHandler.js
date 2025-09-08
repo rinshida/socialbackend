@@ -19,7 +19,7 @@ const transporter = nodemailer.createTransport({
 export async function generateOTP(req,res){
     try {        
 const {email} = req.body
-console.log(email)
+
 // const userExist = await UserSchema.findOne({email:email})
 // console.log(userExist);
 // if(userExist){
@@ -95,7 +95,7 @@ export async function registerUser(req,res){
 
         //token generation         payload:data that pass through token
          const token = jwt.sign({userId:newUser._id},process.env.JWT_TOKEN,{expiresIn:'24h'})
-         console.log(token);
+         
          
 
         if(newUser){
@@ -180,7 +180,7 @@ export async function getPostsFunction(req,res){
     try{
         const posts =  await PostSchema.find()
         const user = await UserSchema.findOne({_id:new ObjectId(userId)})
-        console.log(user);
+        // console.log(user);
         
         if(posts){
             res.status(200).send({user,data:posts})

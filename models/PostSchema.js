@@ -8,4 +8,12 @@ const PostSchema = new mongoose.Schema({
     likes:{type:Number}
 })
 
+
+
+
+
+
+
+
+
 export default mongoose.models.Post || mongoose.model('Post',PostSchema)
