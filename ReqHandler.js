@@ -32,7 +32,7 @@ const changeotp = await otp.updateOne(
     {email:email},{$set:{otp:newotp}}
 )}else{
     const newdata = await otp.create({email,otp:newotp})
-    console.log(newdata);    
+      
 }
 const info = await transporter.sendMail({
     from: 'rinshidav0706@gmail.com',
@@ -41,7 +41,7 @@ const info = await transporter.sendMail({
     text: "Hello world?", // plain‑text body
     html: `${newotp}`, // HTML body
   });
-  console.log(info);
+
   
 return res.status(200).send("otp sented successfully")
 
@@ -185,7 +185,7 @@ export async function getPostsFunction(req,res){
         if(posts){
             res.status(200).send({user,data:posts})
             // res.status(200).send({data:user})
-            console.log('found posts')
+          
             
         }else{
             res.status(404).send("can't find posts")
