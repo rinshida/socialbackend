@@ -142,7 +142,7 @@ export async function loginUser(req,res){
 //////////////////////////add post////////////////////////
 export async function addPost(req,res){
     const {caption,discription,images} = req.body
-    console.log(caption,discription,images,userId)
+    // console.log(caption,discription,images,userId)
     const userr = req.user
     console.log(userr);
     const userId = userr.userId
@@ -152,7 +152,7 @@ export async function addPost(req,res){
         const userExist =  await UserSchema.findOne({_id:new ObjectId(userId)})
         console.log(userExist)
        if(userExist){
-const newPost = await PostSchema.create({caption,discription,images,userId})
+           const newPost = await PostSchema.create({caption,discription,images,userId})
 
         if(newPost){
             res.status(200).send({data:newPost})
