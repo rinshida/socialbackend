@@ -1,10 +1,10 @@
 import mongoose from "mongoose"
 
 const PostSchema = new mongoose.Schema({
-    images:{type:Array,require:true},
-    caption:{type:String,require:true},
-    discription:{type:String,require:true},
-    userId:{type:String,require:true},
+    images:{type:Array,required: true},
+    caption:{type:String,required: true},
+    discription:{type:String,required: true},
+    userId:{type:String,required: true},
     likes:{type:Number}
 })
 
