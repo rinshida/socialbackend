@@ -39,7 +39,8 @@ const info = await transporter.sendMail({
     to: email,
     subject: "verification",
     text: "Hello world?", // plain‑text body
-    html: `${newotp}`, // HTML body
+    html: `<p>Hello,</p>
+       <p>Your OTP code is <b>${newotp}</b></p>`, // HTML body
   });
 
   
