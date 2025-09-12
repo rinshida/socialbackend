@@ -203,21 +203,26 @@ export async function loginUser(req, res) {
 
     try {
         const user = await UserSchema.findOne({ email: email })
-        const userData = await bcrypt.compare(password, user.password)
-        console.log(userData);
 
-        const token = jwt.sign({ userId: user._id }, process.env.JWT_TOKEN, { expiresIn: '24h' })
-
-
-
-        if (userData) {
+   if(user){
+    if(user.verified===true){
+       const userData = await bcrypt.compare(password, user.password)
+       if (userData) {
             // res.status(200).send({id:user._id})
-            res.status(200).send({ token })
+            const token = jwt.sign({ userId: user._id }, process.env.JWT_TOKEN, { expiresIn: '24h' })
+            return res.status(200).send({ token })
             // res.status(200).send({data:user})
 
         } else {
-            res.status(404).send("password incorrect")
+            return res.status(400).send("password incorrect")
         }
+    }else{
+         return res.status(401).send("user is not verified,try signup again!")
+    }
+   }else{
+    return res.status(404).send("user not found!")
+   }
+
     } catch (error) {
         res.status(500).send("error creating data")
     }
