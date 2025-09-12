@@ -20,6 +20,7 @@ try {
     
 } catch (error) {
     console.log(error);
+    return res.send(401).send("token expired or something went wrong")
     
     
 }
