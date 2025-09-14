@@ -269,7 +269,7 @@ export async function getPostsFunction(req, res) {
     console.log("getPostsFunction")
 
     try {
-        const posts = await PostSchema.find()
+        const posts = await PostSchema.find().populate('userId','name profile')
         const user = await UserSchema.findOne({ _id: new ObjectId(userId) })
         // console.log(user);
 
@@ -334,4 +334,31 @@ export async function likeFuction(req, res) {
 
     }
 
+}
+/////////////////profile////////////////////////////////
+export async function getProfieFunction(req, res) {
+
+    const userr = req.user
+    console.log(userr);
+    const userId = userr.userId
+    console.log("getPostsFunction")
+
+    try {
+        const posts = await PostSchema.find({userId:userId})
+        const user = await UserSchema.findOne({ _id: new ObjectId(userId) })
+        // console.log(user);
+
+        if (posts) {
+            res.status(200).send({ user, data: posts })
+            // res.status(200).send({data:user})
+
+
+        } else {
+            res.status(404).send("can't find posts")
+            console.log("can't find posts");
+
+        }
+    } catch (error) {
+        res.status(500).send(error)
+    }
 }

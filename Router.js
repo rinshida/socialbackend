@@ -5,6 +5,7 @@ import Auth from './middlewares/Auth.js'
 const router = Router()
 
 router.route("/getposts").get(Auth,rh.getPostsFunction)
+router.route("/getprofile").get(Auth,rh.getProfieFunction)
 // router.route("/test").post(rh.SampleFunction)
 // router.route("/edit").put(rh.editUserFunction)
 // // router.route("/getuser").post(rh.getOneUserFunction)
