@@ -335,6 +335,48 @@ export async function likeFuction(req, res) {
     }
 
 }
+//----------------------------------follow------------------
+
+export async function followFuction(req, res) {
+    const { userId, targetUserId, followState } = req.body
+    console.log(userId, targetUserId, followState)
+
+    try {
+
+        if (userId === targetUserId) {
+      return res.status(400).json({ message: "You cannot follow yourself" });
+    }
+
+           
+            
+                if (followState === true) {
+                    console.log("follow = true");
+
+                     await UserSchema.findByIdAndUpdate(userId, {$addToSet: { following: targetUserId }});
+                    await UserSchema.findByIdAndUpdate(targetUserId, {$addToSet: { followers: userId }});
+
+                    res.status(200).json({ message: "Followed successfully" });
+
+                } else {
+                    console.log("follow = false");
+                    await UserSchema.findByIdAndUpdate(userId, { $pull: { following: targetUserId } })
+                    await UserSchema.findByIdAndUpdate(targetUserId, { $pull: { followers: userId } });
+                    
+                     res.status(200).json({ message: "Unfollowed successfully" });
+
+                }
+            
+
+            
+
+    } catch (error) {
+
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+
+    }
+
+}
 /////////////////profile////////////////////////////////
 export async function getProfieFunction(req, res) {
 

@@ -16,6 +16,7 @@ router.route("/register").post(rh.signupWithOTP)
 router.route("/login").post(rh.loginUser)
 router.route("/addpost").post(Auth,rh.addPost)
 router.route("/like").post(rh.likeFuction)
+router.route("/follow").post(rh.followFuction)
 router.route("/otp").post(rh.generateOTP)
 router.route("/otpverification").post(rh.otpVerification)
 
